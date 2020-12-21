@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealRandomizer.Android", "MealRandomizer\MealRandomizer.Android\MealRandomizer.Android.csproj", "{CFB07B94-59DB-4F24-AFFA-44A4B039A7C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealRandomizer", "MealRandomizer\MealRandomizer\MealRandomizer.csproj", "{2AD6772A-2639-42AF-8B30-F584A3D3F82B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFB07B94-59DB-4F24-AFFA-44A4B039A7C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB07B94-59DB-4F24-AFFA-44A4B039A7C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB07B94-59DB-4F24-AFFA-44A4B039A7C6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CFB07B94-59DB-4F24-AFFA-44A4B039A7C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB07B94-59DB-4F24-AFFA-44A4B039A7C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB07B94-59DB-4F24-AFFA-44A4B039A7C6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2AD6772A-2639-42AF-8B30-F584A3D3F82B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AD6772A-2639-42AF-8B30-F584A3D3F82B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AD6772A-2639-42AF-8B30-F584A3D3F82B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AD6772A-2639-42AF-8B30-F584A3D3F82B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B804FAD1-FAC0-4255-B653-2F084B4C1E72}
+	EndGlobalSection
+EndGlobal
