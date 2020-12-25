@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:MealRandomizer.Extensions;assembly=MealRandomizer"
+             xmlns:models="clr-namespace:MealRandomizer.Models"
+             xmlns:productViews="clr-namespace:MealRandomizer.Views.ProductsViews"
+             x:Class="MealRandomizer.Views.ProductsViews.CategoriesPage"
+             Title="Продукты">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="round_add_24.xml"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CategoryFrameStyle" TargetType="productViews:CategoryFrameView">
+                <Setter Property="Command" Value="{Binding SelectedCategoryCommand}"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="FirstColumnFrameStyle" BaseResourceKey="CategoryFrameStyle" TargetType="productViews:CategoryFrameView">
+                <Setter Property="Grid.Column" Value="0"/>
+            </Style>
+            <Style x:Key="SecondColumnFrameStyle" BaseResourceKey="CategoryFrameStyle" TargetType="productViews:CategoryFrameView">
+                <Setter Property="Grid.Column" Value="1"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView VerticalScrollBarVisibility="Never">
+            <Grid Padding="10"
+                  ColumnSpacing="10"
+                  RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Frame Padding="0"
+                       CornerRadius="75"
+                       HeightRequest="150"
+                       WidthRequest="150"
+                       HorizontalOptions="Center"
+                       BackgroundColor="{StaticResource DiamondGreen}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectAllCategoriesCommand}"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="Все продукты"
+                           FontAttributes="Bold,Italic"
+                           TextColor="White"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           FontSize="18"/>
+                </Frame>
+                <productViews:CategoryFrameView Text="Выпечка"
+                                                Style="{StaticResource SecondColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse bake.jpg}"
+                                                Category="{x:Static models:ProductCategory.Bake}"
+                                                Grid.Row="0"/>
+                <productViews:CategoryFrameView Text="Бобовые"
+                                                Style="{StaticResource FirstColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse bean.jpg}"
+                                                Category="{x:Static models:ProductCategory.Bean}"
+                                                Grid.Row="1"/>
+                <productViews:CategoryFrameView Text="Ягоды"
+                                                Style="{StaticResource SecondColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse berries.jpg}"
+                                                Category="{x:Static models:ProductCategory.Berry}"
+                                                Grid.Row="1"/>
+                <productViews:CategoryFrameView Text="Шоколад"
+                                                Style="{StaticResource FirstColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse chocolate.jpg}"
+                                                Category="{x:Static models:ProductCategory.Chocolate}"
+                                                Grid.Row="2"/>
+                <productViews:CategoryFrameView Text="Молочные продукты"
+                                                Style="{StaticResource SecondColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse dairy_products.jpg}"
+                                                Category="{x:Static models:ProductCategory.DairyProduct}"
+                                                Grid.Row="2"/>
+                <productViews:CategoryFrameView Text="Напитки"
+                                                Style="{StaticResource FirstColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse drinks.jpg}"
+                                                Category="{x:Static models:ProductCategory.Drink}"
+                                                Grid.Row="3"/>
+                <productViews:CategoryFrameView Text="Яйца"
+                                                Style="{StaticResource SecondColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse eggs.jpg}"
+                                                Category="{x:Static models:ProductCategory.Egg}"
+                                                Grid.Row="3"/>
+                <productViews:CategoryFrameView Text="Фрукты"
+                                                Style="{StaticResource FirstColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse fruits.jpg}"
+                                                Category="{x:Static models:ProductCategory.Fruit}"
+                                                Grid.Row="4"/>
+                <productViews:CategoryFrameView Text="Крупы"
+                                                Style="{StaticResource SecondColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse grain.jpg}"
+                                                Category="{x:Static models:ProductCategory.Grain}"
+                                                Grid.Row="4"/>
+                <productViews:CategoryFrameView Text="Мясо"
+                                                Style="{StaticResource FirstColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse meat.jpg}"
+                                                Category="{x:Static models:ProductCategory.Meat}"
+                                                Grid.Row="5"/>
+                <productViews:CategoryFrameView Text="Мясные продукты"
+                                                Style="{StaticResource SecondColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse meat_products.jpg}"
+                                                Category="{x:Static models:ProductCategory.MeatProduct}"
+                                                Grid.Row="5"/>
+                <productViews:CategoryFrameView Text="Грибы"
+                                                Style="{StaticResource FirstColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse mushrooms.jpg}"
+                                                Category="{x:Static models:ProductCategory.Mushroom}"
+                                                Grid.Row="6"/>
+                <productViews:CategoryFrameView Text="Орехи"
+                                                Style="{StaticResource SecondColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse nuts.jpg}"
+                                                Category="{x:Static models:ProductCategory.Nut}"
+                                                Grid.Row="6"/>
+                <productViews:CategoryFrameView Text="Масло"
+                                                Style="{StaticResource FirstColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse oil.jpg}"
+                                                Category="{x:Static models:ProductCategory.Oil}"
+                                                Grid.Row="7"/>
+                <productViews:CategoryFrameView Text="Макароны"
+                                                Style="{StaticResource SecondColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse pasta.jpg}"
+                                                Category="{x:Static models:ProductCategory.Pasta}"
+                                                Grid.Row="7"/>
+                <productViews:CategoryFrameView Text="Морепродукты"
+                                                Style="{StaticResource FirstColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse seafood.jpg}"
+                                                Category="{x:Static models:ProductCategory.Seafood}"
+                                                Grid.Row="8"/>
+                <productViews:CategoryFrameView Text="Овощи"
+                                                Style="{StaticResource SecondColumnFrameStyle}"
+                                                ImageSource="{extensions:ProductCategoryImageResourse vegetables.jpg}"
+                                                Category="{x:Static models:ProductCategory.Vegetable}"
+                                                Grid.Row="8"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

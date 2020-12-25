@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:productsViews="clr-namespace:MealRandomizer.Views.ProductsViews"
+       xmlns:recipesViews="clr-namespace:MealRandomizer.Views.RecipesViews"
+       xmlns:views="clr-namespace:MealRandomizer.Views"
+       x:Class="MealRandomizer.AppShell"
+       Shell.BackgroundColor="Black"
+       Shell.NavBarHasShadow="False"
+       Shell.TabBarUnselectedColor="LightGray"
+       Shell.TabBarTitleColor="{StaticResource DiamondGreen}"
+       Shell.TitleColor="{StaticResource DiamondGreen}"
+       Shell.TabBarBackgroundColor="Black">
+    <TabBar>
+        <Tab Title="Menu" Icon="menu.png">
+            <ShellContent x:Name="menuTab" ContentTemplate="{DataTemplate views:MenuPage}"/>
+        </Tab>
+        <Tab Title="Recipes" Icon="recipes.png">
+            <ShellContent x:Name="recipesTab" ContentTemplate="{DataTemplate recipesViews:RecipesPage}"/>
+        </Tab>
+        <Tab Title="Products" Icon="products.png">
+            <ShellContent x:Name="productsTab" ContentTemplate="{DataTemplate productsViews:CategoriesPage}"/>
+        </Tab>
+        <Tab Title="User" Icon="round_account_circle_24.xml">
+            <ShellContent x:Name="userTab" ContentTemplate="{DataTemplate views:UserPage}"/>
+        </Tab>
+    </TabBar>
+</Shell>
