@@ -26,7 +26,6 @@
     <ContentPage.Content>
         <ScrollView VerticalScrollBarVisibility="Never">
             <Grid Padding="10"
-                  ColumnSpacing="10"
                   RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -46,9 +45,11 @@
                        HorizontalOptions="Center"
                        BackgroundColor="{StaticResource DiamondGreen}">
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SelectAllCategoriesCommand}"/>
+                        <TapGestureRecognizer Command="{Binding SelectAllCategoriesCommand}"
+                                              CommandParameter="Все продукты"/>
                     </Frame.GestureRecognizers>
-                    <Label Text="Все продукты"
+                    <Label x:Name="allProducts"
+                           Text="Все продукты"
                            FontAttributes="Bold,Italic"
                            TextColor="White"
                            HorizontalTextAlignment="Center"

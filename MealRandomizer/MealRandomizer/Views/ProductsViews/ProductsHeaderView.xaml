@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MealRandomizer.Views.ProductsViews.ProductsHeaderView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="HeaderStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="LightGray"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid Padding="20,0"
+              BackgroundColor="Black"
+              ColumnSpacing="0">
+            <Label Text="Продукт"
+                   Style="{StaticResource HeaderStyle}"
+                   HorizontalTextAlignment="Start"
+                   Grid.Column="0"/>
+            <Label Text="Б"
+                   Style="{StaticResource HeaderStyle}"
+                   Grid.Column="1"/>
+            <Label Text="Ж"
+                   Style="{StaticResource HeaderStyle}"
+                   Grid.Column="2"/>
+            <Label Text="У"
+                   Style="{StaticResource HeaderStyle}"
+                   Grid.Column="3"/>
+            <Label Text="Кал"
+                   Style="{StaticResource HeaderStyle}"
+                   Grid.Column="4"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

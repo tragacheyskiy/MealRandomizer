@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MealRandomizer.Models"
+             x:Class="MealRandomizer.Views.ProductsViews.ProductsView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="NutrientStyle" TargetType="StackLayout">
+                <Setter Property="Spacing" Value="5"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Grid.Row" Value="1"/>
+            </Style>
+            <Style x:Key="NutrientValueStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="LightGray"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="HorizontalTextAlignment" Value="End"/>
+            </Style>
+            <Style x:Key="NutrientUnitStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="CornflowerBlue"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontAttributes" Value="Italic"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <CollectionView ItemsSource="{Binding Products}"
+                        Margin="0,10"
+                        SelectionChangedCommand="{Binding SelectProductCommand}"
+                        SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                        SelectionMode="Single"
+                        ItemSizingStrategy="MeasureFirstItem">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView Padding="10,0">
+                        <Grid ColumnSpacing="5"
+                              BackgroundColor="Black"
+                              Padding="10"
+                              x:DataType="models:Product"
+                              RowSpacing="0">
+                            <!--Name-->
+                            <Label Text="{Binding Name}"
+                                   TextColor="LightGray"
+                                   FontSize="15"
+                                   HorizontalTextAlignment="Start"
+                                   Grid.Row="0"
+                                   Grid.ColumnSpan="4"/>
+                            <!--Proteins-->
+                            <StackLayout Style="{StaticResource NutrientStyle}"
+                                         Grid.Column="1">
+                                <Label Text="{Binding Proteins}"
+                                       Style="{StaticResource NutrientValueStyle}"/>
+                                <Label Text="гр"
+                                       Style="{StaticResource NutrientUnitStyle}"/>
+                            </StackLayout>
+                            <!--Fats-->
+                            <StackLayout Style="{StaticResource NutrientStyle}"
+                                         Grid.Column="2">
+                                <Label Text="{Binding Fats}"
+                                       Style="{StaticResource NutrientValueStyle}"/>
+                                <Label Text="гр"
+                                       Style="{StaticResource NutrientUnitStyle}"/>
+                            </StackLayout>
+                            <!--Carbohydrates-->
+                            <StackLayout Style="{StaticResource NutrientStyle}"
+                                         Grid.Column="3">
+                                <Label Text="{Binding Carbohydrates}"
+                                       Style="{StaticResource NutrientValueStyle}"/>
+                                <Label Text="гр"
+                                       Style="{StaticResource NutrientUnitStyle}"/>
+                            </StackLayout>
+                            <!--Calories-->
+                            <StackLayout Style="{StaticResource NutrientStyle}"
+                                         Grid.Column="4">
+                                <Label Text="{Binding Calories}"
+                                       Style="{StaticResource NutrientValueStyle}"/>
+                                <Label Text="кКал"
+                                       Style="{StaticResource NutrientUnitStyle}"/>
+                            </StackLayout>
+                        </Grid>
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentView.Content>
+</ContentView>

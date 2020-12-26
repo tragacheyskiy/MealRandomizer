@@ -1,10 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:productsViews="clr-namespace:MealRandomizer.Views.ProductsViews"
              x:Class="MealRandomizer.Views.ProductsViews.ProductsPage"
-             Title="{Binding Title}">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource Primary}">
     <ContentPage.Content>
-        <StackLayout>
-        </StackLayout>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <Image Source="{Binding ImageSource}"
+                   Aspect="AspectFill"/>
+            <Label Text="{Binding Title}"
+                   BackgroundColor="#50000000"
+                   FontSize="20"
+                   FontAttributes="Bold,Italic"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   TextColor="White"/>
+            <ImageButton Source="round_arrow_back_24.xml"
+                         Style="{StaticResource NavBarImageButtonStyle}"
+                         Command="{Binding BackButtonCommand}"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Center"/>
+            <ImageButton Source="round_add_24.xml"
+                         Style="{StaticResource NavBarImageButtonStyle}"
+                         HorizontalOptions="End"
+                         VerticalOptions="Center"/>
+            <productsViews:ProductsHeaderView Grid.Row="1"/>
+            <productsViews:ProductsView Grid.Row="2"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

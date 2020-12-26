@@ -1,10 +1,6 @@
-﻿using MealRandomizer.Models;
-using System.Diagnostics;
-using System.Windows.Input;
-using MealRandomizer.ViewModels.ProductsViewModels;
+﻿using MealRandomizer.ViewModels.ProductsViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System;
 
 namespace MealRandomizer.Views.ProductsViews
 {
@@ -45,18 +41,19 @@ namespace MealRandomizer.Views.ProductsViews
         public CategoryFrameView()
         {
             InitializeComponent();
+            CategoryIntelligence = new CategoriesViewModel.CategoryIntelligence();
         }
 
         private static void UpdateCategoryIntelligence(BindableObject bindableObject, object oldValue, object newValue)
         {
             var view = (CategoryFrameView)bindableObject;
 
-            view.CategoryIntelligence = new CategoriesViewModel.CategoryIntelligence()
+            if (view.CategoryIntelligence is CategoriesViewModel.CategoryIntelligence categoryIntelligence)
             {
-                CategoryName = view.Text,
-                ProductCategory = view.Category,
-                ImageSource = view.ImageSource
-            };
+                categoryIntelligence.CategoryName = view.Text;
+                categoryIntelligence.ProductCategory = view.Category;
+                categoryIntelligence.ImageSource = view.ImageSource;
+            }
         }
     }
 }

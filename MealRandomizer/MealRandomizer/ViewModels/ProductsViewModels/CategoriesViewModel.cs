@@ -19,22 +19,24 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
         }
 
         public Command SelectAllCategoriesCommand { get; }
-        public Command<CategoryIntelligence> SelectedCategoryCommand { get; }
+        public Command SelectedCategoryCommand { get; }
 
         public CategoriesViewModel()
         {
+            SelectAllCategoriesCommand = new Command<string>(async (categoryName) =>
+            {
+                var categoryIntelligence = new CategoryIntelligence()
+                {
+                    CategoryName = categoryName,
+                    ProductCategory = ProductCategory.None
+                };
+
+                await PushPageAsync(new AllProductsPage() { BindingContext = new ProductsViewModel(categoryIntelligence) });
+            }, categoryName => !MainPage.IsBusy);
 
             SelectedCategoryCommand = new Command<CategoryIntelligence>(async categoryIntelligence =>
             {
-                Debug.WriteLine($"Category: {categoryIntelligence}");
-                Debug.WriteLine($"Category name: {categoryIntelligence?.CategoryName}");
-                Debug.WriteLine($"Category: {categoryIntelligence?.ProductCategory}");
-                Debug.WriteLine($"Image source: {categoryIntelligence?.ImageSource}");
-
-                MainPage.IsBusy = true;
-                await MainPage.Navigation.PushAsync(new ProductsPage() { BindingContext = new ProductsViewModel(categoryIntelligence) });
-                MainPage.IsBusy = false;
-
+                await PushPageAsync(new ProductsPage() { BindingContext = new ProductsViewModel(categoryIntelligence) });
             }, categoryIntelligence => !MainPage.IsBusy);
         }
     }

@@ -8394,10 +8394,13 @@ namespace MealRandomizer.Droid
 			public const int round_add_24 = 2131165304;
 			
 			// aapt resource value: 0x7F070079
-			public const int tooltip_frame_dark = 2131165305;
+			public const int round_arrow_back_24 = 2131165305;
 			
 			// aapt resource value: 0x7F07007A
-			public const int tooltip_frame_light = 2131165306;
+			public const int tooltip_frame_dark = 2131165306;
+			
+			// aapt resource value: 0x7F07007B
+			public const int tooltip_frame_light = 2131165307;
 			
 			static Drawable()
 			{

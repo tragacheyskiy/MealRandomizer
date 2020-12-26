@@ -13,68 +13,60 @@ using Xamarin.Forms;
 
 namespace MealRandomizer.ViewModels.ProductsViewModels
 {
-    internal class ProductsViewModel
+    internal class ProductsViewModel : BaseViewModel
     {
-        private readonly ProductsRepository productsRepository = ProductsRepository.Instance;
         private readonly CancellationTokenSource tokenSource = new CancellationTokenSource();
-
-        private Task categoryChangingTask;
+        private ProductsRepository productsRepository;
+        private List<Product> productsSource;
+        private bool isInitialized;
 
         public string Title { get; }
         public ImageSource ImageSource { get; }
-        public ICommand AddNewProductCommand { get; }
-        public ICommand SelectCategoryCommand { get; }
-        public ICommand SelectProductCommand { get; }
         public Product SelectedProduct { get; set; }
         public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
+
+        public Command BackButtonCommand { get; }
+        public Command SelectProductCommand { get; }
 
         public ProductsViewModel(CategoriesViewModel.CategoryIntelligence categoryIntelligence)
         {
             Title = categoryIntelligence.CategoryName;
             ImageSource = categoryIntelligence.ImageSource;
 
-            SelectCategoryCommand = new Command<ProductCategory>(async category =>
+            InitializeProductsSource((ProductCategory)categoryIntelligence.ProductCategory);
+
+            BackButtonCommand = new Command(async () => await PopPageAsync(), () => !MainPage.IsBusy);
+        }
+
+        private void InitializeProductsSource(ProductCategory productCategory)
+        {
+            Task.Run(() =>
             {
-                if (categoryChangingTask != null)
+                productsRepository = ProductsRepository.Instance;
+
+                var allProducts = productsRepository.GetAllAsync().Result;
+
+                if (productCategory == ProductCategory.None)
                 {
-                    tokenSource.Cancel();
-                    categoryChangingTask.Wait();
+                    productsSource = new List<Product>(allProducts);
+                }
+                else
+                {
+                    productsSource = new List<Product>(allProducts.Where(product => product.Category == productCategory));
                 }
 
-                await Task.Factory.StartNew(cancellationToken =>
-                {
-                    var token = (CancellationToken)cancellationToken;
+                RefreshProducts();
 
-                    if (token.IsCancellationRequested)
-                    {
-                        return;
-                    }
-
-                    IEnumerable<Product> products = productsRepository.GetAllAsync().Result;
-
-                    if (category != ProductCategory.None)
-                    {
-                        products = products.Where(product => product.Category == category);
-                    }
-
-                    RefreshProducts(products, token);
-                }, tokenSource.Token, tokenSource.Token);
-
-                categoryChangingTask = null;
+                isInitialized = true;
             });
         }
 
-        private void RefreshProducts(IEnumerable<Product> productsSource, CancellationToken token)
+        private void RefreshProducts()
         {
             Products.Clear();
 
             foreach (Product product in productsSource)
             {
-                if (token.IsCancellationRequested)
-                {
-                    return;
-                }
-
                 Products.Add(product);
             }
         }

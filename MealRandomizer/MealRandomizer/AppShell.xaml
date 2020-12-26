@@ -7,7 +7,7 @@
        x:Class="MealRandomizer.AppShell"
        Shell.BackgroundColor="Black"
        Shell.NavBarHasShadow="False"
-       Shell.TabBarUnselectedColor="LightGray"
+       Shell.TabBarUnselectedColor="Gray"
        Shell.TabBarTitleColor="{StaticResource DiamondGreen}"
        Shell.TitleColor="{StaticResource DiamondGreen}"
        Shell.TabBarBackgroundColor="Black">

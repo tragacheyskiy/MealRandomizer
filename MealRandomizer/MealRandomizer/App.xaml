@@ -10,5 +10,11 @@
         <Style TargetType="Page" ApplyToDerivedTypes="True">
             <Setter Property="BackgroundColor" Value="Black"/>
         </Style>
+        <Style x:Key="NavBarImageButtonStyle" TargetType="ImageButton">
+            <Setter Property="Aspect" Value="AspectFit"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
     </Application.Resources>
 </Application>
