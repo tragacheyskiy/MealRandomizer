@@ -9,6 +9,7 @@
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
             <Image Source="{Binding ImageSource}"
@@ -29,8 +30,9 @@
                          Style="{StaticResource NavBarImageButtonStyle}"
                          HorizontalOptions="End"
                          VerticalOptions="Center"/>
-            <productsViews:ProductsHeaderView Grid.Row="1"/>
-            <productsViews:ProductsView Grid.Row="2"/>
+            <productsViews:SearchEntryView Grid.Row="1"/>
+            <productsViews:ProductsHeaderView Grid.Row="2"/>
+            <productsViews:ProductsView Grid.Row="3"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

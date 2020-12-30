@@ -26,7 +26,10 @@
     </ContentView.Resources>
     <ContentView.Content>
         <CollectionView ItemsSource="{Binding Products}"
+                        x:Name="products"
                         Margin="0,10"
+                        RemainingItemsThreshold="5"
+                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreProductsCommand}"
                         SelectionChangedCommand="{Binding SelectProductCommand}"
                         SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
                         SelectionMode="Single"

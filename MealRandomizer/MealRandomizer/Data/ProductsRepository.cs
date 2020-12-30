@@ -23,7 +23,7 @@ namespace MealRandomizer.Data
             //localProducts = new Dictionary<int, Product>(
             //    appStorage.Products.Include(product => product.Recipes).ToDictionary(product => product.Id));
 
-            localProducts = Services.Test.GetRandomProducts(1000).ToDictionary(product => product.Id);
+            localProducts = Services.Test.GetRandomProducts(5000).ToDictionary(product => product.Id);
         }
 
         public async Task<Product> AddAsync(Product product)

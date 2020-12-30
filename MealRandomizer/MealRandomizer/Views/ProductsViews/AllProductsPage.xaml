@@ -11,10 +11,12 @@
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
-            <productsViews:ProductsHeaderView Grid.Row="0"/>
-            <productsViews:ProductsView Grid.Row="1"/>
+            <productsViews:SearchEntryView Grid.Row="0"/>
+            <productsViews:ProductsHeaderView Grid.Row="1"/>
+            <productsViews:ProductsView Grid.Row="2"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -1,32 +1,35 @@
 ﻿using MealRandomizer.Data;
 using MealRandomizer.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MealRandomizer.ViewModels.ProductsViewModels
 {
     internal class ProductsViewModel : BaseViewModel
     {
-        private readonly CancellationTokenSource tokenSource = new CancellationTokenSource();
+        private const int ProductsPerLoad = 25;
+
+        private readonly object locker = new object();
+
+        private bool isSearchEnabled;
+        private bool isLoading;
         private ProductsRepository productsRepository;
         private List<Product> productsSource;
-        private bool isInitialized;
+        private IEnumerator<Product> currentProductsEnumerator;
 
         public string Title { get; }
         public ImageSource ImageSource { get; }
+        public bool IsSearchEnabled { get => isSearchEnabled; set => SetProperty(ref isSearchEnabled, value); }
         public Product SelectedProduct { get; set; }
         public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
 
+        public Command SearchCommand { get; }
         public Command BackButtonCommand { get; }
         public Command SelectProductCommand { get; }
+        public Command LoadMoreProductsCommand { get; }
 
         public ProductsViewModel(CategoriesViewModel.CategoryIntelligence categoryIntelligence)
         {
@@ -35,7 +38,11 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
 
             InitializeProductsSource((ProductCategory)categoryIntelligence.ProductCategory);
 
+            SearchCommand = new Command<string>(soughtProductName => Search(soughtProductName), soughtProductName => IsSearchEnabled);
+
             BackButtonCommand = new Command(async () => await PopPageAsync(), () => !MainPage.IsBusy);
+
+            LoadMoreProductsCommand = new Command(() => Task.Run(LoadMoreProducts), () => !isLoading);
         }
 
         private void InitializeProductsSource(ProductCategory productCategory)
@@ -46,28 +53,79 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
 
                 var allProducts = productsRepository.GetAllAsync().Result;
 
-                if (productCategory == ProductCategory.None)
-                {
-                    productsSource = new List<Product>(allProducts);
-                }
-                else
+                if (productCategory != ProductCategory.None)
                 {
                     productsSource = new List<Product>(allProducts.Where(product => product.Category == productCategory));
                 }
+                else
+                {
+                    productsSource = new List<Product>(allProducts);
+                }
 
-                RefreshProducts();
+                RefreshProducts(productsSource);
 
-                isInitialized = true;
+                IsSearchEnabled = true;
             });
         }
 
-        private void RefreshProducts()
+        private void Search(string soughtProductName)
         {
-            Products.Clear();
-
-            foreach (Product product in productsSource)
+            if (soughtProductName == null)
             {
-                Products.Add(product);
+                return;
+            }
+
+            FindAndRefresh(soughtProductName);
+        }
+
+        private void FindAndRefresh(string soughtProductName)
+        {
+            if (soughtProductName == string.Empty)
+            {
+                Task.Run(() => RefreshProducts(productsSource));
+            }
+            else
+            {
+                Task.Run(() =>
+                {
+                    var soughtProducts = productsSource.Where(product => product.Name.Contains(soughtProductName));
+
+                    RefreshProducts(soughtProducts);
+                });
+            }
+        }
+
+        private void RefreshProducts(IEnumerable<Product> source)
+        {
+            lock (locker)
+            {
+                Products.Clear();
+                currentProductsEnumerator = source.GetEnumerator();
+            }
+
+            LoadMoreProducts();
+        }
+
+        private void LoadMoreProducts()
+        {
+            lock (locker)
+            {
+                isLoading = true;
+
+                int counter = 0;
+
+                while (currentProductsEnumerator.MoveNext())
+                {
+                    if (counter == ProductsPerLoad)
+                    {
+                        break;
+                    }
+
+                    Products.Add(currentProductsEnumerator.Current);
+                    counter++;
+                }
+
+                isLoading = false;
             }
         }
     }
