@@ -15,6 +15,7 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
         private readonly object locker = new object();
 
         private bool isSearchEnabled;
+        private bool isInitializing = true;
         private bool isLoading;
         private ProductsRepository productsRepository;
         private List<Product> productsSource;
@@ -23,6 +24,7 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
         public string Title { get; }
         public ImageSource ImageSource { get; }
         public bool IsSearchEnabled { get => isSearchEnabled; set => SetProperty(ref isSearchEnabled, value); }
+        public bool IsInitializing { get => isInitializing; set => SetProperty(ref isInitializing, value); }
         public Product SelectedProduct { get; set; }
         public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
 
@@ -65,6 +67,7 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
                 RefreshProducts(productsSource);
 
                 IsSearchEnabled = true;
+                IsInitializing = false;
             });
         }
 

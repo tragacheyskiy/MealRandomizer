@@ -10,6 +10,11 @@
         <Style TargetType="Page" ApplyToDerivedTypes="True">
             <Setter Property="BackgroundColor" Value="Black"/>
         </Style>
+        <Style TargetType="ActivityIndicator">
+            <Setter Property="IsRunning" Value="True"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
         <Style x:Key="NavBarImageButtonStyle" TargetType="ImageButton">
             <Setter Property="Aspect" Value="AspectFit"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>

@@ -1,10 +1,5 @@
 ﻿using MealRandomizer.Models;
 using MealRandomizer.Views.ProductsViews;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MealRandomizer.ViewModels.ProductsViewModels

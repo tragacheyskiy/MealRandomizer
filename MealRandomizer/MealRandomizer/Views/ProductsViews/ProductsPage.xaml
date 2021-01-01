@@ -32,6 +32,8 @@
                          VerticalOptions="Center"/>
             <productsViews:SearchEntryView Grid.Row="1"/>
             <productsViews:ProductsHeaderView Grid.Row="2"/>
+            <ActivityIndicator IsVisible="{Binding IsInitializing}"
+                               Grid.Row="3"/>
             <productsViews:ProductsView Grid.Row="3"/>
         </Grid>
     </ContentPage.Content>

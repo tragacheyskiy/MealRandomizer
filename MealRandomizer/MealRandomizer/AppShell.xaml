@@ -7,10 +7,9 @@
        x:Class="MealRandomizer.AppShell"
        Shell.BackgroundColor="Black"
        Shell.NavBarHasShadow="False"
-       Shell.TabBarUnselectedColor="Gray"
        Shell.TabBarTitleColor="{StaticResource DiamondGreen}"
-       Shell.TitleColor="{StaticResource DiamondGreen}"
-       Shell.TabBarBackgroundColor="Black">
+       Shell.TabBarUnselectedColor="Gray"
+       Shell.TitleColor="{StaticResource DiamondGreen}">
     <TabBar>
         <Tab Title="Menu" Icon="menu.png">
             <ShellContent x:Name="menuTab" ContentTemplate="{DataTemplate views:MenuPage}"/>

@@ -16,6 +16,8 @@
             </Grid.RowDefinitions>
             <productsViews:SearchEntryView Grid.Row="0"/>
             <productsViews:ProductsHeaderView Grid.Row="1"/>
+            <ActivityIndicator IsVisible="{Binding IsInitializing}"
+                               Grid.Row="2"/>
             <productsViews:ProductsView Grid.Row="2"/>
         </Grid>
     </ContentPage.Content>
