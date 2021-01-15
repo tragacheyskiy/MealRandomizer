@@ -6,25 +6,36 @@
              x:Class="MealRandomizer.Views.ProductsViews.ProductsView"
              x:DataType="productsViewModels:ProductsViewModel">
     <ContentView.Resources>
-        <ResourceDictionary>
-            <Style TargetType="StackLayout">
-                <Setter Property="Spacing" Value="5"/>
-                <Setter Property="Orientation" Value="Horizontal"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="Grid.Row" Value="1"/>
-            </Style>
-            <Style x:Key="NutrientValueStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="LightGray"/>
-                <Setter Property="FontSize" Value="14"/>
-                <Setter Property="FontAttributes" Value="None"/>
-                <Setter Property="HorizontalTextAlignment" Value="End"/>
-            </Style>
-            <Style x:Key="NutrientUnitStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="CornflowerBlue"/>
-                <Setter Property="FontSize" Value="14"/>
-                <Setter Property="FontAttributes" Value="Italic"/>
-            </Style>
-        </ResourceDictionary>
+        <Style TargetType="ContentView">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <Style TargetType="StackLayout">
+            <Setter Property="Spacing" Value="5"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="Grid.Row" Value="1"/>
+        </Style>
+        <Style x:Key="NutrientValueStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="LightGray"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontAttributes" Value="None"/>
+            <Setter Property="HorizontalTextAlignment" Value="End"/>
+        </Style>
+        <Style x:Key="NutrientUnitStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="CornflowerBlue"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontAttributes" Value="Italic"/>
+        </Style>
     </ContentView.Resources>
     <ContentView.Content>
         <CollectionView ItemsSource="{Binding Products}"
@@ -32,7 +43,7 @@
                         RemainingItemsThreshold="5"
                         RemainingItemsThresholdReachedCommand="{Binding LoadMoreProductsCommand}"
                         SelectionChangedCommand="{Binding SelectProductCommand}"
-                        SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedProduct}"
                         SelectionMode="Single"
                         ItemSizingStrategy="MeasureFirstItem">
             <CollectionView.ItemsLayout>

@@ -7,6 +7,7 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
 {
     internal class ProductViewModel
     {
+        public Product CurrentProduct { get; }
         public IList<LocalizedCategory> LocalizedCategories { get; } = CategoriesViewModel.LocalizedCategories;
         public ValidatableLocalizedCategoryWithVisuals LocalizedCategory { get; } = new ValidatableLocalizedCategoryWithVisuals();
         public ValidatableStringWithVisuals Name { get; } = new ValidatableStringWithVisuals();
@@ -24,6 +25,8 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
 
         public ProductViewModel(ProductCategory currentCategory = ProductCategory.None, Product product = null)
         {
+            CurrentProduct = product;
+
             SetCurrentCategory(currentCategory);
 
             SetValues(product);
@@ -33,21 +36,39 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
 
         public Product GetNewProduct()
         {
-            return new Product()
+            if (CurrentProduct == null)
             {
-                Category = LocalizedCategory.Value.Category,
-                Name = Name.Value.Trim(),
-                Proteins = ParseValue(Proteins.Value),
-                Fats = ParseValue(Fats.Value),
-                Carbohydrates = ParseValue(Carbohydrates.Value),
-                Calories = ParseValue(Calories.Value)
-            };
+                return SetNewProductValues(new Product());
+            }
+
+            return SetNewProductValues(CurrentProduct);
+        }
+
+        private Product SetNewProductValues(Product newProduct)
+        {
+            newProduct.Category = LocalizedCategory.Value.Category;
+            newProduct.Name = Name.Value.Trim();
+            newProduct.Proteins = ParseValue(Proteins.Value);
+            newProduct.Fats = ParseValue(Fats.Value);
+            newProduct.Carbohydrates = ParseValue(Carbohydrates.Value);
+            newProduct.Calories = ParseValue(Calories.Value);
+
+            return newProduct;
+        }
+
+        private void SetCurrentCategory(ProductCategory currentCategory)
+        {
+            if (currentCategory != ProductCategory.None)
+            {
+                LocalizedCategory.Value = LocalizedCategories.FirstOrDefault(category => category.Category == currentCategory);
+            }
         }
 
         private void SetValues(Product product)
         {
             if (product != null)
             {
+                LocalizedCategory.Value = LocalizedCategories.FirstOrDefault(category => category.Category == product.Category);
                 Name.Value = product.Name;
                 Proteins.Value = $"{product.Proteins}";
                 Fats.Value = $"{product.Fats}";
@@ -76,14 +97,6 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
 
             Calories.AddValidationRule(isNotNullOrWhiteSpaceRule);
             Calories.AddValidationRule(isFloatNumberRule);
-        }
-
-        private void SetCurrentCategory(ProductCategory currentCategory)
-        {
-            if (currentCategory != ProductCategory.None)
-            {
-                LocalizedCategory.Value = LocalizedCategories.FirstOrDefault(category => category.Category == currentCategory);
-            }
         }
 
         private float ParseValue(string value)

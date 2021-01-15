@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:productsViews="clr-namespace:MealRandomizer.Views.ProductsViews"
+             xmlns:productsViewModels="clr-namespace:MealRandomizer.ViewModels.ProductsViewModels"
+             x:Class="MealRandomizer.Views.ProductsViews.ProductDetaiPage"
+             x:DataType="productsViewModels:ProductDetailViewModel"
+             Title="{Binding ProductName}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="round_delete_24.xml"
+                     Command="{Binding DeleteCommand}"/>
+        <ToolbarItem IconImageSource="round_check_24.xml"
+                     Command="{Binding UpdateCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <productsViews:ProductView BindingContext="{Binding ProductViewModel}"/>
+    </ContentPage.Content>
+</ContentPage>

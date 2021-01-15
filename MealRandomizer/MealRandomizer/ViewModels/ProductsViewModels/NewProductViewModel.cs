@@ -28,9 +28,7 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
             {
                 if (!MainPage.IsBusy && ProductViewModel.IsInputCorrect)
                 {
-                    MainPage.IsBusy = true;
                     await AddProductAsync();
-                    MainPage.IsBusy = false;
                     await PopPageAsync();
                 }
             });
@@ -40,9 +38,12 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
 
         private async Task AddProductAsync()
         {
-            await productsRepository.AddAsync(ProductViewModel.GetNewProduct());
+            MainPage.IsBusy = true;
 
+            await productsRepository.AddAsync(ProductViewModel.GetNewProduct());
             productAddedAction?.Invoke();
+
+            MainPage.IsBusy = false;
         }
     }
 }
