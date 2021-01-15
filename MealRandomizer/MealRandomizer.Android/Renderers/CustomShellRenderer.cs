@@ -1,5 +1,5 @@
 ﻿using Android.Content;
-using Android.Support.Design.Widget;
+using Google.Android.Material.BottomNavigation;
 using MealRandomizer;
 using MealRandomizer.Droid.Renderers;
 using Xamarin.Forms;
@@ -8,7 +8,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportRenderer(typeof(AppShell), typeof(CustomShellRenderer))]
 namespace MealRandomizer.Droid.Renderers
 {
-    public class CustomShellRenderer : ShellRenderer
+    internal class CustomShellRenderer : ShellRenderer
     {
         public CustomShellRenderer(Context context) : base(context) { }
 
@@ -18,7 +18,7 @@ namespace MealRandomizer.Droid.Renderers
         }
     }
 
-    public class CustomBottomNavView : ShellBottomNavViewAppearanceTracker
+    internal class CustomBottomNavView : ShellBottomNavViewAppearanceTracker
     {
         public CustomBottomNavView(IShellContext shellContext, ShellItem shellItem) : base(shellContext, shellItem)
         {

@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MealRandomizer.Controls"
+             xmlns:productsViewModels="clr-namespace:MealRandomizer.ViewModels.ProductsViewModels"
              x:Class="MealRandomizer.Views.ProductsViews.SearchEntryView"
+             x:DataType="productsViewModels:ProductsViewModel"
              BackgroundColor="Black">
   <ContentView.Content>
-        <Entry Margin="20,0"
+        <controls:BorderlessEntry Margin="20,0"
                Placeholder="Поиск"
                PlaceholderColor="Gray"
                TextColor="LightGray"

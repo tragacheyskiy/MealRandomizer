@@ -1,5 +1,7 @@
 ﻿using MealRandomizer.Data;
 using MealRandomizer.Models;
+using MealRandomizer.Views.ProductsViews;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,11 +10,12 @@ using Xamarin.Forms;
 
 namespace MealRandomizer.ViewModels.ProductsViewModels
 {
-    internal class ProductsViewModel : BaseViewModel
+    internal sealed class ProductsViewModel : BaseViewModel
     {
         private const int ProductsPerLoad = 25;
 
         private readonly object locker = new object();
+        private readonly LocalizedCategory localizedCategory;
 
         private bool isSearchEnabled;
         private bool isInitializing = true;
@@ -21,50 +24,111 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
         private List<Product> productsSource;
         private IEnumerator<Product> currentProductsEnumerator;
 
-        public string Title { get; }
-        public ImageSource ImageSource { get; }
+        public string CategoryName { get; }
+        public ImageSource CategoryImage { get; }
         public bool IsSearchEnabled { get => isSearchEnabled; set => SetProperty(ref isSearchEnabled, value); }
         public bool IsInitializing { get => isInitializing; set => SetProperty(ref isInitializing, value); }
         public Product SelectedProduct { get; set; }
         public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
 
+        public Command AddCommand { get; }
         public Command SearchCommand { get; }
-        public Command BackButtonCommand { get; }
+        public Command BackCommand { get; }
         public Command SelectProductCommand { get; }
         public Command LoadMoreProductsCommand { get; }
 
-        public ProductsViewModel(CategoriesViewModel.CategoryIntelligence categoryIntelligence)
+        public ProductsViewModel(LocalizedCategory localizedCategory = null, ImageSource categoryImage = null)
         {
-            Title = categoryIntelligence.CategoryName;
-            ImageSource = categoryIntelligence.ImageSource;
+            this.localizedCategory = localizedCategory;
 
-            InitializeProductsSource((ProductCategory)categoryIntelligence.ProductCategory);
+            CategoryName = GetCategoryName();
+            CategoryImage = categoryImage;
 
-            SearchCommand = new Command<string>(soughtProductName => Search(soughtProductName), soughtProductName => IsSearchEnabled);
+            InitializeProductsSource();
 
-            BackButtonCommand = new Command(async () => await PopPageAsync(), () => !MainPage.IsBusy);
+            AddCommand = new Command(async () =>
+            {
+                if (!MainPage.IsBusy)
+                {
+                    await PushPageAsync(new NewProductPage() { BindingContext = GetNewProductViewModel() });
+                }
+            });
 
-            LoadMoreProductsCommand = new Command(() => Task.Run(LoadMoreProducts), () => !isLoading);
+            SearchCommand = new Command<string>(soughtProductName =>
+            {
+                if (isSearchEnabled)
+                {
+                    Search(soughtProductName);
+                }
+            });
+
+            BackCommand = new Command(async () =>
+            {
+                if (!MainPage.IsBusy)
+                {
+                    await PopPageAsync();
+                }
+            });
+
+            LoadMoreProductsCommand = new Command(() =>
+            {
+                if (!isLoading)
+                {
+                    Task.Run(LoadMoreProducts);
+                }
+            });
         }
 
-        private void InitializeProductsSource(ProductCategory productCategory)
+        private void RefreshproductsAfterAdding()
+        {
+            Task.Run(SetProductsSourceAndRefresh);
+        }
+
+        private string GetCategoryName()
+        {
+            return localizedCategory == null ? Resources.Categories.None : localizedCategory.CategoryName;
+        }
+
+        private NewProductViewModel GetNewProductViewModel()
+        {
+            if (localizedCategory == null)
+            {
+                return new NewProductViewModel(new ProductViewModel(), RefreshproductsAfterAdding);
+            }
+            else
+            {
+                return new NewProductViewModel(new ProductViewModel(localizedCategory.Category), RefreshproductsAfterAdding);
+            }
+        }
+
+        private List<Product> GetProductsSource()
+        {
+            var allProducts = productsRepository.GetAllAsync().Result;
+
+            if (localizedCategory == null)
+            {
+                return new List<Product>(allProducts);
+            }
+            else
+            {
+                return new List<Product>(allProducts.Where(product => product.Category == localizedCategory.Category));
+            }
+        }
+
+        private void SetProductsSourceAndRefresh()
+        {
+            productsSource = GetProductsSource();
+
+            RefreshProducts(productsSource);
+        }
+
+        private void InitializeProductsSource()
         {
             Task.Run(() =>
             {
                 productsRepository = ProductsRepository.Instance;
 
-                var allProducts = productsRepository.GetAllAsync().Result;
-
-                if (productCategory != ProductCategory.None)
-                {
-                    productsSource = new List<Product>(allProducts.Where(product => product.Category == productCategory));
-                }
-                else
-                {
-                    productsSource = new List<Product>(allProducts);
-                }
-
-                RefreshProducts(productsSource);
+                SetProductsSourceAndRefresh();
 
                 IsSearchEnabled = true;
                 IsInitializing = false;
@@ -91,7 +155,7 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
             {
                 Task.Run(() =>
                 {
-                    var soughtProducts = productsSource.Where(product => product.Name.Contains(soughtProductName));
+                    var soughtProducts = productsSource.Where(product => product.Name.Contains(soughtProductName, StringComparison.OrdinalIgnoreCase));
 
                     RefreshProducts(soughtProducts);
                 });

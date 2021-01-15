@@ -7,30 +7,20 @@ namespace MealRandomizer.Views.ProductsViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryFrameView : ContentView
     {
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(
-            "Text",
-            typeof(string),
-            typeof(CategoryFrameView),
-            string.Empty,
-            propertyChanged: UpdateCategoryIntelligence);
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create(
-            "Command",
-            typeof(Command),
-            typeof(CategoryFrameView));
-        public static readonly BindableProperty CategoryProperty = BindableProperty.Create(
-            "Category",
-            typeof(object),
-            typeof(CategoryFrameView),
-            propertyChanged: UpdateCategoryIntelligence);
-        public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(
-            "ImageSource",
-            typeof(ImageSource),
-            typeof(CategoryFrameView),
-            propertyChanged: UpdateCategoryIntelligence);
-        public static readonly BindableProperty CategoryIntelligenceProperty = BindableProperty.Create(
-            "CategoryIntelligence",
-            typeof(object),
-            typeof(CategoryFrameView));
+        public static readonly BindableProperty TextProperty = 
+            BindableProperty.Create(nameof(Text), typeof(string), typeof(CategoryFrameView), string.Empty, propertyChanged: UpdateCategoryIntelligence);
+
+        public static readonly BindableProperty CommandProperty = 
+            BindableProperty.Create(nameof(Command), typeof(Command), typeof(CategoryFrameView));
+
+        public static readonly BindableProperty CategoryProperty = 
+            BindableProperty.Create(nameof(Category), typeof(object), typeof(CategoryFrameView), propertyChanged: UpdateCategoryIntelligence);
+
+        public static readonly BindableProperty ImageSourceProperty = 
+            BindableProperty.Create(nameof(ImageSource), typeof(ImageSource), typeof(CategoryFrameView), propertyChanged: UpdateCategoryIntelligence);
+
+        public static readonly BindableProperty CategoryIntelligenceProperty = 
+            BindableProperty.Create(nameof(CategoryIntelligence), typeof(object), typeof(CategoryFrameView));
 
         public string Text { get => (string)GetValue(TextProperty); set => SetValue(TextProperty, value); }
         public Command Command { get => (Command)GetValue(CommandProperty); set => SetValue(CommandProperty, value); }

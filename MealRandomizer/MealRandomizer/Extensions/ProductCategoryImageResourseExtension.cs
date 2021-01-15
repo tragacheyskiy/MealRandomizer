@@ -6,7 +6,7 @@ using Xamarin.Forms.Xaml;
 namespace MealRandomizer.Extensions
 {
     [ContentProperty(nameof(Source))]
-    public class ProductCategoryImageResourseExtension : IMarkupExtension
+    internal sealed class ProductCategoryImageResourseExtension : IMarkupExtension
     {
         public string Source { get; set; }
 

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealRandomizer.Android", "MealRandomizer\MealRandomizer.Android\MealRandomizer.Android.csproj", "{CFB07B94-59DB-4F24-AFFA-44A4B039A7C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealRandomizer", "MealRandomizer\MealRandomizer\MealRandomizer.csproj", "{2AD6772A-2639-42AF-8B30-F584A3D3F82B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealRandomizer", "MealRandomizer\MealRandomizer\MealRandomizer.csproj", "{2AD6772A-2639-42AF-8B30-F584A3D3F82B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

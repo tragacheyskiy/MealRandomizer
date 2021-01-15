@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MealRandomizer.Controls"
+             xmlns:productsViewModels="clr-namespace:MealRandomizer.ViewModels.ProductsViewModels"
+             x:Class="MealRandomizer.Views.ProductsViews.ProductView"
+             x:DataType="productsViewModels:ProductViewModel">
+    <ContentView.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+            <Setter Property="BackgroundColor" Value="Black"/>
+            <Setter Property="Padding" Value="10,0"/>
+        </Style>
+        <Style TargetType="controls:BorderlessEntry">
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="TextColor" Value="LightGray"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="ClearButtonVisibility" Value="WhileEditing"/>
+        </Style>
+        <Style x:Key="TitleStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="LightGray"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Grid.Row" Value="0"/>
+        </Style>
+        <Style x:Key="TitleUnitStyle" BaseResourceKey="TitleStyle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="FontAttributes" Value="Italic"/>
+            <Setter Property="TextColor" Value="CornflowerBlue"/>
+            </Style>
+        <Style x:Key="ErrorStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="TextColor" Value="{StaticResource LightRed}"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Grid.Row" Value="2"/>
+        </Style>
+    </ContentView.Resources>
+    <StackLayout Margin="10"
+                         Spacing="10">
+        <!--Category-->
+        <Frame>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Категория"
+                       Style="{StaticResource TitleStyle}"/>
+                <Frame Grid.Row="1"
+                       BorderColor="{Binding LocalizedCategory.BorderColor}">
+                    <controls:LinelessPicker ItemsSource="{Binding LocalizedCategories}"
+                                             SelectedItem="{Binding LocalizedCategory.Value}"
+                                             IsFocused="{Binding LocalizedCategory.IsFocused}"
+                                             TextColor="LightGray"
+                                             FontSize="15"
+                                             VerticalTextAlignment="Center"/>
+                </Frame>
+                <Label Text="{Binding LocalizedCategory.ValidationMessage}"
+                       Style="{StaticResource ErrorStyle}"/>
+            </Grid>
+        </Frame>
+        <!--Name-->
+        <Frame>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Название"
+                       Style="{StaticResource TitleStyle}"/>
+                <Frame Grid.Row="1"
+                       BorderColor="{Binding Name.BorderColor}">
+                    <controls:BorderlessEntry Text="{Binding Name.Value}"
+                                              IsFocused="{Binding Name.IsFocused}"/>
+                </Frame>
+                <Label Text="{Binding Name.ValidationMessage}"
+                       Style="{StaticResource ErrorStyle}"/>
+            </Grid>
+        </Frame>
+        <!--Proteins-->
+        <Frame>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Белки"
+                       Style="{StaticResource TitleStyle}"/>
+                <Label Text="грамм"
+                       Style="{StaticResource TitleUnitStyle}"/>
+                <Frame Grid.Row="1"
+                       BorderColor="{Binding Proteins.BorderColor}">
+                    <controls:BorderlessEntry Text="{Binding Proteins.Value}"
+                                              IsFocused="{Binding Proteins.IsFocused}"
+                                              Keyboard="Numeric"/>
+                </Frame>
+                <Label Text="{Binding Proteins.ValidationMessage}"
+                       Style="{StaticResource ErrorStyle}"/>
+            </Grid>
+        </Frame>
+        <!--Fats-->
+        <Frame>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Жиры"
+                       Style="{StaticResource TitleStyle}"/>
+                <Label Text="грамм"
+                       Style="{StaticResource TitleUnitStyle}"/>
+                <Frame Grid.Row="1"
+                       BorderColor="{Binding Fats.BorderColor}">
+                    <controls:BorderlessEntry Text="{Binding Fats.Value}"
+                                              IsFocused="{Binding Fats.IsFocused}"
+                                              Keyboard="Numeric"/>
+                </Frame>
+                <Label Text="{Binding Fats.ValidationMessage}"
+                       Style="{StaticResource ErrorStyle}"/>
+            </Grid>
+        </Frame>
+        <!--Carbohydrates-->
+        <Frame>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Углеводы"
+                       Style="{StaticResource TitleStyle}"/>
+                <Label Text="грамм"
+                       Style="{StaticResource TitleUnitStyle}"/>
+                <Frame Grid.Row="1"
+                       BorderColor="{Binding Carbohydrates.BorderColor}">
+                    <controls:BorderlessEntry Text="{Binding Carbohydrates.Value}"
+                                              IsFocused="{Binding Carbohydrates.IsFocused}"
+                                              Keyboard="Numeric"/>
+                </Frame>
+                <Label Text="{Binding Carbohydrates.ValidationMessage}"
+                       Style="{StaticResource ErrorStyle}"/>
+            </Grid>
+        </Frame>
+        <!--Calories-->
+        <Frame>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Калорийность"
+                       Style="{StaticResource TitleStyle}"/>
+                <Label Text="кКал"
+                       Style="{StaticResource TitleUnitStyle}"/>
+                <Frame Grid.Row="1"
+                       BorderColor="{Binding Calories.BorderColor}">
+                    <controls:BorderlessEntry Text="{Binding Calories.Value}"
+                                              IsFocused="{Binding Calories.IsFocused}"
+                                              Keyboard="Numeric"/>
+                </Frame>
+                <Label Text="{Binding Calories.ValidationMessage}"
+                       Style="{StaticResource ErrorStyle}"/>
+            </Grid>
+        </Frame>
+    </StackLayout>
+</ContentView>

@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:productsViews="clr-namespace:MealRandomizer.Views.ProductsViews"
+             xmlns:productsViewModels="clr-namespace:MealRandomizer.ViewModels.ProductsViewModels"
              x:Class="MealRandomizer.Views.ProductsViews.ProductsPage"
+             x:DataType="productsViewModels:ProductsViewModel"
              Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource Primary}">
     <ContentPage.Content>
@@ -12,9 +14,9 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
-            <Image Source="{Binding ImageSource}"
+            <Image Source="{Binding CategoryImage}"
                    Aspect="AspectFill"/>
-            <Label Text="{Binding Title}"
+            <Label Text="{Binding CategoryName}"
                    BackgroundColor="#50000000"
                    FontSize="20"
                    FontAttributes="Bold,Italic"
@@ -23,11 +25,12 @@
                    TextColor="White"/>
             <ImageButton Source="round_arrow_back_24.xml"
                          Style="{StaticResource NavBarImageButtonStyle}"
-                         Command="{Binding BackButtonCommand}"
+                         Command="{Binding BackCommand}"
                          HorizontalOptions="Start"
                          VerticalOptions="Center"/>
             <ImageButton Source="round_add_24.xml"
                          Style="{StaticResource NavBarImageButtonStyle}"
+                         Command="{Binding AddCommand}"
                          HorizontalOptions="End"
                          VerticalOptions="Center"/>
             <productsViews:SearchEntryView Grid.Row="1"/>

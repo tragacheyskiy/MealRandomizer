@@ -2,10 +2,12 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:MealRandomizer.Models"
-             x:Class="MealRandomizer.Views.ProductsViews.ProductsView">
+             xmlns:productsViewModels="clr-namespace:MealRandomizer.ViewModels.ProductsViewModels"
+             x:Class="MealRandomizer.Views.ProductsViews.ProductsView"
+             x:DataType="productsViewModels:ProductsViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
-            <Style x:Key="NutrientStyle" TargetType="StackLayout">
+            <Style TargetType="StackLayout">
                 <Setter Property="Spacing" Value="5"/>
                 <Setter Property="Orientation" Value="Horizontal"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
@@ -26,7 +28,6 @@
     </ContentView.Resources>
     <ContentView.Content>
         <CollectionView ItemsSource="{Binding Products}"
-                        x:Name="products"
                         Margin="0,10"
                         RemainingItemsThreshold="5"
                         RemainingItemsThresholdReachedCommand="{Binding LoadMoreProductsCommand}"
@@ -54,32 +55,28 @@
                                    Grid.Row="0"
                                    Grid.ColumnSpan="4"/>
                             <!--Proteins-->
-                            <StackLayout Style="{StaticResource NutrientStyle}"
-                                         Grid.Column="1">
+                            <StackLayout Grid.Column="1">
                                 <Label Text="{Binding Proteins}"
                                        Style="{StaticResource NutrientValueStyle}"/>
                                 <Label Text="гр"
                                        Style="{StaticResource NutrientUnitStyle}"/>
                             </StackLayout>
                             <!--Fats-->
-                            <StackLayout Style="{StaticResource NutrientStyle}"
-                                         Grid.Column="2">
+                            <StackLayout Grid.Column="2">
                                 <Label Text="{Binding Fats}"
                                        Style="{StaticResource NutrientValueStyle}"/>
                                 <Label Text="гр"
                                        Style="{StaticResource NutrientUnitStyle}"/>
                             </StackLayout>
                             <!--Carbohydrates-->
-                            <StackLayout Style="{StaticResource NutrientStyle}"
-                                         Grid.Column="3">
+                            <StackLayout Grid.Column="3">
                                 <Label Text="{Binding Carbohydrates}"
                                        Style="{StaticResource NutrientValueStyle}"/>
                                 <Label Text="гр"
                                        Style="{StaticResource NutrientUnitStyle}"/>
                             </StackLayout>
                             <!--Calories-->
-                            <StackLayout Style="{StaticResource NutrientStyle}"
-                                         Grid.Column="4">
+                            <StackLayout Grid.Column="4">
                                 <Label Text="{Binding Calories}"
                                        Style="{StaticResource NutrientValueStyle}"/>
                                 <Label Text="кКал"

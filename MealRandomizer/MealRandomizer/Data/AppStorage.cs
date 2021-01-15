@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace MealRandomizer.Data
 {
-    internal class AppStorage : DbContext
+    internal sealed class AppStorage : DbContext
     {
         private const string DbName = "AppStorage";
 

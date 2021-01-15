@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MealRandomizer.Data
 {
-    internal class ProductsRepository : IRepository<int, Product>
+    internal sealed class ProductsRepository : IRepository<int, Product>
     {
         private static readonly Lazy<ProductsRepository> instance = new Lazy<ProductsRepository>(() => new ProductsRepository(), true);
 
@@ -20,10 +20,11 @@ namespace MealRandomizer.Data
         private ProductsRepository()
         {
             appStorage = new AppStorage();
-            //localProducts = new Dictionary<int, Product>(
-            //    appStorage.Products.Include(product => product.Recipes).ToDictionary(product => product.Id));
 
-            localProducts = Services.Test.GetRandomProducts(5000).ToDictionary(product => product.Id);
+            localProducts = new Dictionary<int, Product>(
+                appStorage.Products.Include(product => product.Recipes).ToDictionary(product => product.Id));
+
+            //localProducts = Services.Test.GetRandomProducts(5000).ToDictionary(product => product.Id);
         }
 
         public async Task<Product> AddAsync(Product product)

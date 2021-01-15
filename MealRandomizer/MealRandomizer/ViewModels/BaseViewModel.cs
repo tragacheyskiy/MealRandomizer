@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace MealRandomizer.ViewModels
 {
-    internal class BaseViewModel : INotifyPropertyChanged
+    internal abstract class BaseViewModel : INotifyPropertyChanged
     {
         protected Page MainPage => Application.Current.MainPage;
 
@@ -40,12 +40,19 @@ namespace MealRandomizer.ViewModels
             }
         }
 
+        #region NotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         protected void SetProperty<T>(ref T source, T value, [CallerMemberName] string propertyName = "")
         {
             source = value;
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }
