@@ -40,7 +40,8 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
                 if (isDelete)
                 {
                     await DeleteProductAsync();
-                    await PopPageAsync();
+
+                    PopPage();
                 }
             });
 
@@ -49,7 +50,8 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
                 if (!MainPage.IsBusy && ProductViewModel.IsInputCorrect)
                 {
                     await UpdateProductAsync();
-                    await PopPageAsync();
+                    
+                    PopPage();
                 }
             });
         }

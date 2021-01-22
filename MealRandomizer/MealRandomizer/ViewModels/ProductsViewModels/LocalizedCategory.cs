@@ -8,15 +8,16 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
     internal class LocalizedCategory : IEquatable<LocalizedCategory>, IComparable<LocalizedCategory>
     {
         public string CategoryName { get; }
+        public string EnumName { get; }
         public ProductCategory Category { get; }
 
         public LocalizedCategory(ProductCategory category)
         {
             Category = category;
 
-            string name = Enum.GetName(typeof(ProductCategory), category);
+            EnumName = Enum.GetName(typeof(ProductCategory), category);
 
-            CategoryName = (string)typeof(Categories).GetProperty(name, BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+            CategoryName = (string)typeof(Categories).GetProperty(EnumName, BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
         }
 
         public int CompareTo(LocalizedCategory other) => CategoryName.CompareTo(other.CategoryName);

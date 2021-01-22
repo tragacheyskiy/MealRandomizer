@@ -13,41 +13,41 @@
   <ItemGroup>
     <None Remove="ProductCategoriesPics\bake.jpg" />
     <None Remove="ProductCategoriesPics\bean.jpg" />
-    <None Remove="ProductCategoriesPics\berries.jpg" />
+    <None Remove="ProductCategoriesPics\berry.jpg" />
     <None Remove="ProductCategoriesPics\chocolate.jpg" />
-    <None Remove="ProductCategoriesPics\dairy_products.jpg" />
-    <None Remove="ProductCategoriesPics\drinks.jpg" />
-    <None Remove="ProductCategoriesPics\eggs.jpg" />
-    <None Remove="ProductCategoriesPics\fruits.jpg" />
+    <None Remove="ProductCategoriesPics\dairy_product.jpg" />
+    <None Remove="ProductCategoriesPics\drink.jpg" />
+    <None Remove="ProductCategoriesPics\egg.jpg" />
+    <None Remove="ProductCategoriesPics\fruit.jpg" />
     <None Remove="ProductCategoriesPics\grain.jpg" />
     <None Remove="ProductCategoriesPics\meat.jpg" />
-    <None Remove="ProductCategoriesPics\meat_products.jpg" />
-    <None Remove="ProductCategoriesPics\mushrooms.jpg" />
-    <None Remove="ProductCategoriesPics\nuts.jpg" />
+    <None Remove="ProductCategoriesPics\meat_product.jpg" />
+    <None Remove="ProductCategoriesPics\mushroom.jpg" />
+    <None Remove="ProductCategoriesPics\nut.jpg" />
     <None Remove="ProductCategoriesPics\oil.jpg" />
     <None Remove="ProductCategoriesPics\pasta.jpg" />
     <None Remove="ProductCategoriesPics\seafood.jpg" />
-    <None Remove="ProductCategoriesPics\vegetables.jpg" />
+    <None Remove="ProductCategoriesPics\vegetable.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="ProductCategoriesPics\bake.jpg" />
     <EmbeddedResource Include="ProductCategoriesPics\bean.jpg" />
-    <EmbeddedResource Include="ProductCategoriesPics\berries.jpg" />
+    <EmbeddedResource Include="ProductCategoriesPics\berry.jpg" />
     <EmbeddedResource Include="ProductCategoriesPics\chocolate.jpg" />
-    <EmbeddedResource Include="ProductCategoriesPics\dairy_products.jpg" />
-    <EmbeddedResource Include="ProductCategoriesPics\drinks.jpg" />
-    <EmbeddedResource Include="ProductCategoriesPics\eggs.jpg" />
-    <EmbeddedResource Include="ProductCategoriesPics\fruits.jpg" />
+    <EmbeddedResource Include="ProductCategoriesPics\dairy_product.jpg" />
+    <EmbeddedResource Include="ProductCategoriesPics\drink.jpg" />
+    <EmbeddedResource Include="ProductCategoriesPics\egg.jpg" />
+    <EmbeddedResource Include="ProductCategoriesPics\fruit.jpg" />
     <EmbeddedResource Include="ProductCategoriesPics\grain.jpg" />
     <EmbeddedResource Include="ProductCategoriesPics\meat.jpg" />
-    <EmbeddedResource Include="ProductCategoriesPics\meat_products.jpg" />
-    <EmbeddedResource Include="ProductCategoriesPics\mushrooms.jpg" />
-    <EmbeddedResource Include="ProductCategoriesPics\nuts.jpg" />
+    <EmbeddedResource Include="ProductCategoriesPics\meat_product.jpg" />
+    <EmbeddedResource Include="ProductCategoriesPics\mushroom.jpg" />
+    <EmbeddedResource Include="ProductCategoriesPics\nut.jpg" />
     <EmbeddedResource Include="ProductCategoriesPics\oil.jpg" />
     <EmbeddedResource Include="ProductCategoriesPics\pasta.jpg" />
     <EmbeddedResource Include="ProductCategoriesPics\seafood.jpg" />
-    <EmbeddedResource Include="ProductCategoriesPics\vegetables.jpg" />
+    <EmbeddedResource Include="ProductCategoriesPics\vegetable.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -92,9 +92,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ProductsViews\CategoriesPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\ProductsViews\CategoryFrameView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ProductsViews\NewProductPage.xaml">

@@ -129,7 +129,7 @@
   <data name="Chocolate" xml:space="preserve">
     <value>Шоколад</value>
   </data>
-  <data name="DairyProduct" xml:space="preserve">
+  <data name="Dairy_Product" xml:space="preserve">
     <value>Молочные продукты</value>
   </data>
   <data name="Drink" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="Meat" xml:space="preserve">
     <value>Мясо</value>
   </data>
-  <data name="MeatProduct" xml:space="preserve">
+  <data name="Meat_Product" xml:space="preserve">
     <value>Мясные продукты</value>
   </data>
   <data name="Mushroom" xml:space="preserve">

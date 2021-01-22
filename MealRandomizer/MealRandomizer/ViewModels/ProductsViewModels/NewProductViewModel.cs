@@ -19,17 +19,15 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
         {
             ProductViewModel = productViewModel;
 
-            Task.Run(() =>
-            {
-                productsRepository = ProductsRepository.Instance;
-            });
+            Task.Run(() => productsRepository = ProductsRepository.Instance);
 
             AddCommand = new Command(async () =>
             {
                 if (!MainPage.IsBusy && ProductViewModel.IsInputCorrect)
                 {
                     await AddProductAsync();
-                    await PopPageAsync();
+
+                    PopPage();
                 }
             });
 

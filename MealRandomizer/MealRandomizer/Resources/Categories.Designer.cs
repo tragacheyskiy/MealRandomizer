@@ -99,9 +99,9 @@ namespace MealRandomizer.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Dairy products.
         /// </summary>
-        internal static string DairyProduct {
+        internal static string Dairy_Product {
             get {
-                return ResourceManager.GetString("DairyProduct", resourceCulture);
+                return ResourceManager.GetString("Dairy_Product", resourceCulture);
             }
         }
         
@@ -153,9 +153,9 @@ namespace MealRandomizer.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Meat products.
         /// </summary>
-        internal static string MeatProduct {
+        internal static string Meat_Product {
             get {
-                return ResourceManager.GetString("MeatProduct", resourceCulture);
+                return ResourceManager.GetString("Meat_Product", resourceCulture);
             }
         }
         

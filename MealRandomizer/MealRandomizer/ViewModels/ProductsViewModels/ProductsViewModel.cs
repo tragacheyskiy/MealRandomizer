@@ -38,28 +38,28 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
         public Command SelectProductCommand { get; }
         public Command LoadMoreProductsCommand { get; }
 
-        public ProductsViewModel(LocalizedCategory localizedCategory = null, ImageSource categoryImage = null)
+        public ProductsViewModel(LocalizedCategory localizedCategory, ImageSource categoryImage = null)
         {
             this.localizedCategory = localizedCategory;
 
-            CategoryName = GetCategoryName();
+            CategoryName = localizedCategory.CategoryName;
             CategoryImage = categoryImage;
 
             InitializeProductsSource();
 
-            AddCommand = new Command(async () =>
+            AddCommand = new Command(() =>
             {
                 if (!MainPage.IsBusy)
                 {
-                    await PushPageAsync(new NewProductPage() { BindingContext = GetNewProductViewModel() });
+                    PushPage(new NewProductPage() { BindingContext = GetNewProductViewModel() });
                 }
             });
 
-            BackCommand = new Command(async () =>
+            BackCommand = new Command(() =>
             {
                 if (!MainPage.IsBusy)
                 {
-                    await PopPageAsync();
+                    PopPage();
                 }
             });
 
@@ -71,13 +71,13 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
                 }
             });
 
-            SelectProductCommand = new Command(async () =>
+            SelectProductCommand = new Command(() =>
             {
                 if (!MainPage.IsBusy && SelectedProduct != null)
                 {
-                    var productViewModel = new ProductViewModel(product: SelectedProduct);
+                    var viewModel = new ProductViewModel(product: SelectedProduct);
 
-                    await PushPageAsync(new ProductDetaiPage() { BindingContext = new ProductDetailViewModel(productViewModel, RefreshproductsSourceAfterChanging) });
+                    PushPage(new ProductDetaiPage() { BindingContext = new ProductDetailViewModel(viewModel, RefreshproductsSourceAfterChanging) });
 
                     SelectedProduct = null;
                 }
@@ -97,14 +97,9 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
             Task.Run(SetProductsSourceAndRefresh);
         }
 
-        private string GetCategoryName()
-        {
-            return localizedCategory == null ? Resources.Categories.None : localizedCategory.CategoryName;
-        }
-
         private NewProductViewModel GetNewProductViewModel()
         {
-            if (localizedCategory == null)
+            if (localizedCategory.Category == ProductCategory.None)
             {
                 return new NewProductViewModel(new ProductViewModel(), RefreshproductsSourceAfterChanging);
             }
@@ -118,7 +113,7 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
         {
             var allProducts = productsRepository.GetAllAsync().Result;
 
-            if (localizedCategory == null)
+            if (localizedCategory.Category == ProductCategory.None)
             {
                 return new List<Product>(allProducts);
             }
@@ -140,7 +135,6 @@ namespace MealRandomizer.ViewModels.ProductsViewModels
             Task.Run(() =>
             {
                 productsRepository = ProductsRepository.Instance;
-
                 SetProductsSourceAndRefresh();
 
                 IsSearchEnabled = true;

@@ -10,27 +10,27 @@ namespace MealRandomizer.ViewModels
     {
         protected Page MainPage => Application.Current.MainPage;
 
-        protected Task PushPageModalAsync(Page page)
+        protected void PushPageModal(Page page)
         {
-            return OccupyPage(() => MainPage.Navigation.PushModalAsync(page));
+            OccupyPage(() => MainPage.Navigation.PushModalAsync(page));
         }
 
-        protected Task PopPageModalAsync()
+        protected void PopPageModal()
         {
-            return OccupyPage(() => MainPage.Navigation.PopModalAsync());
+            OccupyPage(() => MainPage.Navigation.PopModalAsync());
         }
 
-        protected Task PushPageAsync(Page page)
+        protected void PushPage(Page page)
         {
-            return OccupyPage(() => MainPage.Navigation.PushAsync(page));
+            OccupyPage(() => MainPage.Navigation.PushAsync(page));
         }
 
-        protected Task PopPageAsync()
+        protected void PopPage()
         {
-            return OccupyPage(() => MainPage.Navigation.PopAsync());
+            OccupyPage(() => MainPage.Navigation.PopAsync());
         }
 
-        private async Task OccupyPage(Func<Task> navigationFunc)
+        private async void OccupyPage(Func<Task> navigationFunc)
         {
             if (!MainPage.IsBusy)
             {
